@@ -4,16 +4,21 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @match       https://github.com/*
 // @grant       none
-// @require     https://cdn.jsdelivr.net/npm/@violentmonkey/dom@1
 // ==/UserScript==
 
-VM.observe(document.body, _ => {
-  let findButton = document.querySelector('[data-hydro-click*=FIND_FILE_BUTTON]')
+let counter = 0
+
+setInterval(_ => {
+  if (document.querySelector('[data-editor-button]')) return
+  const findButton = document.querySelector('[data-hydro-click*=FIND_FILE_BUTTON]')
   if (findButton) {
-    let editButton = findButton.cloneNode()
-    editButton.href = `https://github.dev/${location.pathname.replace('/', '')}`
+    const editButton = findButton.cloneNode()
+    const path = location.pathname.split('/')
+    const owner = path[1]
+    const repo = path[2]
+    editButton.href = `https://github.dev/${owner}/${repo}`
     editButton.innerText = 'Open in web editor'
+    editButton.dataset.editorButton = true
     findButton.parentNode.insertBefore(editButton, findButton)
-    return true
   }
-})
+}, 1000)
