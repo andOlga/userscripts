@@ -3,7 +3,6 @@
 // @namespace    https://github.com/ooa113y/userscripts
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
-// @grant GM_registerMenuCommand
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @grant GM_getValue
@@ -34,14 +33,20 @@ function download (suffix) {
     }
 }
 
-GM_registerMenuCommand("Use MP3", _ => { GM_setValue('format', 'mp3'); location.reload(); })
-GM_registerMenuCommand("Use FLAC (might not work on all albums)", _ => { GM_setValue('format', 'flac'); location.reload(); })
-
 const dlink = document.querySelector('.albumMassDownload div a')
 dlink.href = '#'
-dlink.innerHTML = `<nobr>click to download as ${GM_getValue('format', 'mp3').toUpperCase()} (registration bypass enabled)</nobr>`
+dlink.innerHTML = `click to download as ${GM_getValue('format', 'mp3').toUpperCase()}`
 dlink.addEventListener('click', event => {
   event.preventDefault()
   dlink.innerText = 'Downloading, please wait...'
   download(GM_getValue('format', 'mp3'))
 })
+
+const clink = document.createElement('a')
+clink.innerText = ' (change format?)'
+clink.href = '#'
+clink.addEventListener('click', _ => {
+  GM_setValue('format', GM_getValue('format', 'mp3') === 'mp3' ? 'flac' : 'mp3')
+  location.reload()
+})
+dlink.parentNode.appendChild(clink)
