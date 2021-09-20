@@ -8,6 +8,12 @@
 // @grant       GM_registerMenuCommand
 // ==/UserScript==
 
-GM_registerMenuCommand("Open this page", _ => {
-  window.open(`steam://openurl/${location.href}`)
-})
+const original = document.querySelector('.header_installsteam_btn_content')
+const button = original.cloneNode()
+button.style.backgroundImage = 'none'
+button.style.paddingLeft = '9px'
+button.style.backgroundColor = 'green'
+button.style.marginRight = '9px'
+button.href = `steam://openurl/${location.href}`
+button.innerText = 'Open in Steam'
+original.parentNode.insertBefore(button, original)
