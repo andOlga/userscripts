@@ -4,7 +4,7 @@
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      4
+// @version      5
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @connect vgmsite.com
@@ -27,12 +27,12 @@ function download (suffix) {
     for (const song of songs) {
         GM_xmlhttpRequest({url: song.url, onload: data => {
             dlPage.innerHTML = data.responseText
-            const link = dlPage.querySelector(`a[href$=${suffix}]`)
+            let link = dlPage.querySelector(`a[href$=${suffix}]`)
             if (!link) {
-              if (!alerted) alert(`FLAC is not supported for this album. Please use the MP3 link instead.`)
+              suffix = 'mp3'
+              link = dlPage.querySelector(`a[href$=${suffix}]`)
+              if (!alerted) alert(`FLAC is not supported for this album. Falling back to MP3.`)
               alerted = true
-              location.reload()
-              return
             }
             GM_download(
               link.href,
