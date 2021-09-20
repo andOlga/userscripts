@@ -4,3 +4,5 @@ The general usefulness of some of these scripts is close to nil as they deal wit
 but anyone's welcome to use and tweak them for their own purposes if they see fit.
 
 The scripts are tested exclusively on [Violentmonkey](https://violentmonkey.github.io). Tampermonkey and most other userscript managers *should* be compatible, but no promises are made. Greasemonkey is *not* compatible with some of these scripts. 
+
+The scripts are listed [here](./scripts). To install any of them, click the "Raw" button while on a browser that has a userscript manager installed.
