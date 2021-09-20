@@ -2,6 +2,8 @@
 // @name        Open in Steam
 // @namespace   https://github.com/ooa113y/userscripts
 // @description Open Steam links in the client
+// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @version      1
 // @match       https://store.steampowered.com/*
 // @match       https://steamcommunity.com/*
 // @match       https://help.steampowered.com/*

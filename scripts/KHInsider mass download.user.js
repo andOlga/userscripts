@@ -3,6 +3,8 @@
 // @namespace    https://github.com/ooa113y/userscripts
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
+// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @version      1
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @grant GM_getValue

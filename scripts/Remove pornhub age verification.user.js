@@ -4,6 +4,8 @@
 // @match        https://www.pornhub.com/*
 // @grant        none
 // @description  Gets rid of the annoying age verification banner on every PH page
+// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @version      1
 // ==/UserScript==
 
 (function() {
