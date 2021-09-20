@@ -47,7 +47,7 @@ mp3link.href = '#'
 mp3link.innerHTML = `MP3`
 mp3link.addEventListener('click', event => {
   event.preventDefault()
-  mp3link.innerText = 'Downloading, please wait...'
+  mp3link.remove()
   flaclink.remove()
   download('mp3')
 })
@@ -57,7 +57,7 @@ flaclink.innerText = ' | FLAC'
 flaclink.href = '#'
 flaclink.addEventListener('click', _ => {
   event.preventDefault()
-  flaclink.innerText = 'Downloading, please wait...'
+  flaclink.remove()
   mp3link.remove()
   download('flac')
 })
