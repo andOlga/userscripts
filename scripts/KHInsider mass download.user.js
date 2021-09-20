@@ -6,6 +6,8 @@
 // @grant GM_registerMenuCommand
 // @grant GM_xmlhttpRequest
 // @grant GM_download
+// @grant GM_getValue
+// @grant GM_setValue
 // @connect vgmsite.com
 // ==/UserScript==
 
@@ -32,5 +34,14 @@ function download (suffix) {
     }
 }
 
-GM_registerMenuCommand("as MP3", _ => download('mp3'))
-GM_registerMenuCommand("as FLAC", _ => download('flac'))
+GM_registerMenuCommand("Use MP3", _ => { GM_setValue('format', 'mp3'); location.reload(); })
+GM_registerMenuCommand("Use FLAC (might not work on all albums)", _ => { GM_setValue('format', 'flac'); location.reload(); })
+
+const dlink = document.querySelector('.albumMassDownload div a')
+dlink.href = '#'
+dlink.innerHTML = `<nobr>click to download as ${GM_getValue('format', 'mp3').toUpperCase()} (registration bypass enabled)</nobr>`
+dlink.addEventListener('click', event => {
+  event.preventDefault()
+  dlink.innerText = 'Downloading, please wait...'
+  download(GM_getValue('format', 'mp3'))
+})
