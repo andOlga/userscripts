@@ -4,15 +4,11 @@
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      3
+// @version      4
 // @grant GM_xmlhttpRequest
 // @grant GM_download
-// @grant GM_getValue
-// @grant GM_setValue
 // @connect vgmsite.com
 // ==/UserScript==
-
-GM_setValue('format', GM_getValue('format', 'mp3'))
 
 let idx = 1
 const songs = Array.from(document.getElementsByClassName('playlistDownloadSong')).map(x => {
@@ -33,9 +29,8 @@ function download (suffix) {
             dlPage.innerHTML = data.responseText
             const link = dlPage.querySelector(`a[href$=${suffix}]`)
             if (!link) {
-              if (!alerted) alert(`${GM_getValue('format').toUpperCase()} is not supported for this album. Switching to MP3.`)
+              if (!alerted) alert(`FLAC is not supported for this album. Please use the MP3 link instead.`)
               alerted = true
-              GM_setValue('format', 'mp3')
               location.reload()
               return
             }
@@ -47,20 +42,23 @@ function download (suffix) {
     }
 }
 
-const dlink = document.querySelector('.albumMassDownload div a')
-dlink.href = '#'
-dlink.innerHTML = `click to download as ${GM_getValue('format').toUpperCase()}`
-dlink.addEventListener('click', event => {
+const mp3link = document.querySelector('.albumMassDownload div a')
+mp3link.href = '#'
+mp3link.innerHTML = `MP3`
+mp3link.addEventListener('click', event => {
   event.preventDefault()
-  dlink.innerText = 'Downloading, please wait...'
-  download(GM_getValue('format'))
+  mp3link.innerText = 'Downloading, please wait...'
+  flaclink.remove()
+  download('mp3')
 })
 
-const clink = document.createElement('a')
-clink.innerText = ' (change format?)'
-clink.href = '#'
-clink.addEventListener('click', _ => {
-  GM_setValue('format', GM_getValue('format') === 'mp3' ? 'flac' : 'mp3')
-  location.reload()
+const flaclink = document.createElement('a')
+flaclink.innerText = ' | FLAC'
+flaclink.href = '#'
+flaclink.addEventListener('click', _ => {
+  event.preventDefault()
+  flaclink.innerText = 'Downloading, please wait...'
+  mp3link.remove()
+  download('flac')
 })
-dlink.parentNode.appendChild(clink)
+mp3link.parentNode.appendChild(flaclink)
