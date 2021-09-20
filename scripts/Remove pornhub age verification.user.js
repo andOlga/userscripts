@@ -3,7 +3,7 @@
 // @namespace    https://github.com/ooa113y/userscripts
 // @match        https://www.pornhub.com/*
 // @grant        none
-// @description  Pornhub's age verification in some countries forces a sign-in through social networks. This bypasses that nonsense.
+// @description  Gets rid of the annoying age verification banner on every PH page
 // ==/UserScript==
 
 (function() {
