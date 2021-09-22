@@ -4,7 +4,7 @@
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      5
+// @version      6
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @grant GM_setValue
