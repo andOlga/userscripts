@@ -4,7 +4,7 @@
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      6
+// @version      7
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @grant GM_setValue
@@ -36,10 +36,11 @@ function download (suffix) {
               suffix = 'mp3'
               link = dlPage.querySelector(`a[href$=${suffix}]`)
             }
-            GM_download(
-              link.href,
-              `${String(song.idx).padStart(padLength, '0')} - ${song.name}.${suffix}`
-            )
+            GM_download({
+              url: link.href,
+              name: `${String(song.idx).padStart(padLength, '0')} - ${song.name}.${suffix}`,
+              onerror: console.error
+            })
         }})
     }
 }
