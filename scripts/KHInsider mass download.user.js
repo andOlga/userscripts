@@ -4,7 +4,7 @@
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      7
+// @version      10
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @grant GM_setValue
@@ -45,34 +45,28 @@ function download (suffix) {
     }
 }
 
-GM_setValue('extra_formats', GM_getValue('extra_formats', ['flac']).map(x => x.toLowerCase()))
-const extraFormats = GM_getValue('extra_formats')
-const extraLinks = []
+const formats = GM_getValue('formats', ['mp3', 'flac']).map(x => x.toLowerCase())
+if (!formats.includes('mp3')) formats.unshift('mp3')
+GM_setValue('formats', formats)
+const originalLink = document.querySelector('.albumMassDownload div a')
+const container = originalLink.parentNode
+originalLink.remove()
 
-function removeExtraLinks() {
-  for (const link of extraLinks) link.remove()
-}
+let separator
 
-const mp3link = document.querySelector('.albumMassDownload div a')
-mp3link.href = '#'
-mp3link.innerHTML = `MP3`
-mp3link.addEventListener('click', event => {
-  event.preventDefault()
-  mp3link.remove()
-  removeExtraLinks()
-  download('mp3')
-})
-
-for (const format of extraFormats) {
-  const extraLink = document.createElement('a')
-  extraLink.innerText = ` | ${format.toUpperCase()}`
-  extraLink.href = '#'
-  extraLink.addEventListener('click', _ => {
+for (const format of formats) {
+  const link = document.createElement('a')
+  link.innerText = format.toUpperCase()
+  link.href = '#'
+  link.addEventListener('click', _ => {
     event.preventDefault()
-    removeExtraLinks()
-    mp3link.remove()
+    document.querySelector('.albumMassDownload').remove()
     download(format)
   })
-  extraLinks.push(extraLink)
-  mp3link.parentNode.appendChild(extraLink)
+  container.appendChild(link)
+  separator = document.createElement('span')
+  separator.innerText = ' | '
+  container.appendChild(separator)
 }
+
+separator.remove()
