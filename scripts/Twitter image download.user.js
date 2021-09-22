@@ -3,7 +3,8 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @description Download images from Twitter with sensible filenames
-// @version     1
+// @icon        https://twitter.com/favicon.ico
+// @version     2
 // @match       https://pbs.twimg.com/media/*
 // @grant       GM_download
 // ==/UserScript==

@@ -2,8 +2,9 @@
 // @name        Open in Steam
 // @namespace   https://github.com/ooa113y/userscripts
 // @description Open Steam links in the client
+// @icon        https://store.steampowered.com/favicon.ico
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      1
+// @version      2
 // @match       https://store.steampowered.com/*
 // @match       https://steamcommunity.com/*
 // @match       https://help.steampowered.com/*

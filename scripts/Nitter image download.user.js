@@ -3,7 +3,8 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @description Download images from Nitter with sensible filenames
-// @version     1
+// @icon        https://nitter.net/favicon.ico
+// @version     2
 // @match       https://nitter.net/pic/*
 // @grant       GM_download
 // ==/UserScript==

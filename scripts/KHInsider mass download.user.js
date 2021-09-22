@@ -3,8 +3,9 @@
 // @namespace    https://github.com/ooa113y/userscripts
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
+// @icon         https://downloads.khinsider.com/images/favicon.ico
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      12
+// @version      13
 // @grant GM_xmlhttpRequest
 // @grant GM_download
 // @grant GM_setValue
@@ -52,6 +53,7 @@ const formats = [...new Set(
 )]
 if (!formats.includes('mp3')) formats.unshift('mp3')
 GM_setValue('formats', formats)
+
 const originalLink = document.querySelector('.albumMassDownload div a')
 const container = originalLink.parentNode
 originalLink.remove()

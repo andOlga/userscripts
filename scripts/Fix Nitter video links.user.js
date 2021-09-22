@@ -3,7 +3,8 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @description Copies video links on Nitter to clipboard as TwitFix links (for Discord embeds)
-// @version     2
+// @icon        https://nitter.net/favicon.ico
+// @version     3
 // @match       https://nitter.net/*/status/*
 // @grant       GM_setClipboard
 // ==/UserScript==
