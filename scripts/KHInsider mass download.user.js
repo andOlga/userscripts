@@ -7,6 +7,8 @@
 // @version      5
 // @grant GM_xmlhttpRequest
 // @grant GM_download
+// @grant GM_setValue
+// @grant GM_getValue
 // @connect vgmsite.com
 // ==/UserScript==
 
@@ -29,10 +31,10 @@ function download (suffix) {
             dlPage.innerHTML = data.responseText
             let link = dlPage.querySelector(`a[href$=${suffix}]`)
             if (!link) {
+              if (!alerted) alert(`${suffix.toUpperCase()} is not supported for this album. Falling back to MP3.`)
+              alerted = true
               suffix = 'mp3'
               link = dlPage.querySelector(`a[href$=${suffix}]`)
-              if (!alerted) alert(`FLAC is not supported for this album. Falling back to MP3.`)
-              alerted = true
             }
             GM_download(
               link.href,
@@ -42,23 +44,34 @@ function download (suffix) {
     }
 }
 
+GM_setValue('extra_formats', GM_getValue('extra_formats', ['flac']).map(x => x.toLowerCase()))
+const extraFormats = GM_getValue('extra_formats')
+const extraLinks = []
+
+function removeExtraLinks() {
+  for (const link of extraLinks) link.remove()
+}
+
 const mp3link = document.querySelector('.albumMassDownload div a')
 mp3link.href = '#'
 mp3link.innerHTML = `MP3`
 mp3link.addEventListener('click', event => {
   event.preventDefault()
   mp3link.remove()
-  flaclink.remove()
+  removeExtraLinks()
   download('mp3')
 })
 
-const flaclink = document.createElement('a')
-flaclink.innerText = ' | FLAC'
-flaclink.href = '#'
-flaclink.addEventListener('click', _ => {
-  event.preventDefault()
-  flaclink.remove()
-  mp3link.remove()
-  download('flac')
-})
-mp3link.parentNode.appendChild(flaclink)
+for (const format of extraFormats) {
+  const extraLink = document.createElement('a')
+  extraLink.innerText = ` | ${format.toUpperCase()}`
+  extraLink.href = '#'
+  extraLink.addEventListener('click', _ => {
+    event.preventDefault()
+    removeExtraLinks()
+    mp3link.remove()
+    download(format)
+  })
+  extraLinks.push(extraLink)
+  mp3link.parentNode.appendChild(extraLink)
+}
