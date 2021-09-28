@@ -3,7 +3,7 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     1
+// @version     2
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
 // @match https://nitter.pussthecat.org/*
@@ -74,7 +74,7 @@ for (const pref of knownPrefs) {
 const sitesConfigured = GM_getValue('sites_configured') || [];
 if (!sitesConfigured.includes(location.host)) { // Only configure each site once
   for (const val of GM_listValues()) { // Allow adding custom settings as well
-    if (val === null) continue
+    if (val === null || val === 'sites_configured') continue
     document.cookie = `${val}=${GM_getValue(val)}`
   }
   sitesConfigured.push(location.host)
