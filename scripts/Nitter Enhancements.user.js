@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        Default Nitter settings
+// @name        Nitter Enhancements
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     4
+// @version     1
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
 // @match https://nitter.pussthecat.org/*
@@ -63,32 +63,82 @@
 // @match https://nitter.sugoma.tk/*
 // @match https://twiiit.com/*
 // @match https://twitit.gq/*
+// @match https://*.twitter.com/*
 // @grant GM_getValue
 // @grant GM_setValue
 // @grant GM_listValues
+// @grant GM_download
+// @grant GM_setClipboard
 // ==/UserScript==
 
-function getCookie(cookie) { // Helper function to check existing settings
-  const found = document.cookie.split('; ').find(x => x.startsWith(`${cookie}=`))
-  if (found) {
-    return found.split('=')[1]
-  } else {
-    return null
+// === Check whether individual parts of the script are enabled/disabled ===
+GM_setValue('enable_redirect', GM_getValue('enable_redirect', true))
+GM_setValue('enable_settings', GM_getValue('enable_settings', true))
+GM_setValue('enable_videofix', GM_getValue('enable_videofix', true))
+GM_setValue('enable_imagedownload', GM_getValue('enable_imagedownload', true))
+
+// === Redirect from Twitter ===
+if (GM_getValue('enable_redirect')) {
+  if (location.hostname === 'twitter.com') {
+    GM_setValue('redirect_instance', GM_getValue('redirect_instance', 'nitter.net'))
+    location.href = location.href.replace('twitter.com', GM_getValue('redirect_instance'))
   }
 }
 
-let needReload = false
-const knownPrefs = ['hlsPlayback', 'muteVideos', 'proxyVideos', 'replaceYoutube', 'theme']
-for (const pref of knownPrefs) {
-  GM_setValue(pref, GM_getValue(pref, null)) // Initialise Values page with well-known settings
+// === Set Default Settings ===
+if (GM_getValue('enable_settings')) {
+  function getCookie(cookie) { // Helper function to check existing settings
+    const found = document.cookie.split('; ').find(x => x.startsWith(`${cookie}=`))
+    if (found) {
+      return found.split('=')[1]
+    } else {
+      return null
+    }
+  }
+
+  let needReload = false
+  const knownPrefs = ['hlsPlayback', 'muteVideos', 'proxyVideos', 'replaceYoutube', 'theme']
+  for (const pref of knownPrefs) {
+    GM_setValue(pref, GM_getValue(pref, null)) // Initialise Values page with well-known settings
+  }
+
+  for (const val of knownPrefs) {
+    if (GM_getValue(val) === null) continue
+    if (getCookie(val) === null) {
+      document.cookie = `${val}=${GM_getValue(val)}`
+      needReload = true
+    }
+  }
+
+  if (needReload) location.reload()
 }
 
-for (const val of GM_listValues()) { // Allow adding custom settings as well
-  if (val === null) continue
-  if (getCookie(val) === null) {
-    document.cookie = `${val}=${GM_getValue(val)}`
-    needReload = true
+// === Fix Video Links ===
+if (GM_getValue('enable_videofix')) {
+  if (location.pathname.includes('/status/')) {
+      const videoContainer = document.getElementsByTagName('video')[0].closest('.card')
+      const button = document.createElement('button')
+      button.innerText = 'Copy TwitFix link'
+      button.addEventListener('click', event => {
+        GM_setClipboard(location.href.replace(location.host, 'fxtwitter.com'))
+        button.innerText = 'Copied!'
+        setTimeout(_ => { button.innerText = 'Copy TwitFix link'}, 1000)
+      })
+      videoContainer.appendChild(button)
   }
 }
 
-if (needReload) location.reload()
+// == Allow Image Download ==
+if (GM_getValue('enable_imagedownload')) {
+  if (location.pathname.includes('/pic/')) {
+    const button = document.createElement('button')
+    button.innerText = '⬇'
+    button.style.position = 'absolute'
+    button.style.left = 0
+    button.style.top = 0
+    button.addEventListener('click', _ => {
+      GM_download(location.pathname, location.pathname.replace('/pic/media%2F', '').replace('%3Fname%3Dorig', ''))
+    })
+    document.body.appendChild(button)
+  }
+}
