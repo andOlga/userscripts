@@ -3,7 +3,7 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     2
+// @version     3
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
 // @match https://nitter.pussthecat.org/*
@@ -71,13 +71,11 @@ const knownPrefs = ['hlsPlayback', 'muteVideos', 'proxyVideos', 'replaceYoutube'
 for (const pref of knownPrefs) {
   GM_setValue(pref, GM_getValue(pref, null)) // Initialise Values page with well-known settings
 }
-const sitesConfigured = GM_getValue('sites_configured') || [];
-if (!sitesConfigured.includes(location.host)) { // Only configure each site once
-  for (const val of GM_listValues()) { // Allow adding custom settings as well
-    if (val === null || val === 'sites_configured') continue
-    document.cookie = `${val}=${GM_getValue(val)}`
-  }
-  sitesConfigured.push(location.host)
-  GM_setValue('sites_configured', sitesConfigured)
+for (const val of GM_listValues()) { // Allow adding custom settings as well
+  if (val === null) continue
+  document.cookie = `${val}=${GM_getValue(val)}`
+}
+if (!sessionStorage.alreadyBeenHere) {
+  sessionStorage.alreadyBeenHere = 'true'
   location.reload()
 }
