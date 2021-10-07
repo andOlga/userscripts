@@ -4,14 +4,13 @@
 // @icon        https://github.dev/favicon.ico
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
-// @version      2
+// @version      3
 // @match       https://github.com/*
 // @grant       none
+// @require https://cdn.jsdelivr.net/npm/@violentmonkey/dom@1
 // ==/UserScript==
 
-let counter = 0
-
-setInterval(_ => {
+VM.observe(document.body, _ => {
   if (document.querySelector('[data-editor-button]')) return
   const findButton = document.querySelector('[data-hydro-click*=FIND_FILE_BUTTON]')
   if (findButton) {
@@ -24,4 +23,4 @@ setInterval(_ => {
     editButton.dataset.editorButton = true
     findButton.parentNode.insertBefore(editButton, findButton)
   }
-}, 1000)
+})
