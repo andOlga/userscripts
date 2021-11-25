@@ -3,7 +3,7 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     1
+// @version     2
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
 // @match https://nitter.pussthecat.org/*
@@ -79,9 +79,9 @@ GM_setValue('enable_imagedownload', GM_getValue('enable_imagedownload', true))
 
 // === Redirect from Twitter ===
 if (GM_getValue('enable_redirect')) {
-  if (location.hostname === 'twitter.com') {
+  if (location.hostname.includes('twitter.com')) {
     GM_setValue('redirect_instance', GM_getValue('redirect_instance', 'nitter.net'))
-    location.href = location.href.replace('twitter.com', GM_getValue('redirect_instance'))
+    location.href = location.href.replace(location.hostname, GM_getValue('redirect_instance'))
   }
 }
 
