@@ -3,7 +3,8 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     2
+// @version     3
+// @noframes
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
 // @match https://nitter.pussthecat.org/*
