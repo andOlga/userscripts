@@ -3,7 +3,7 @@
 // @namespace   https://github.com/ooa113y/userscripts
 // @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     3
+// @version     4
 // @noframes
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
@@ -98,7 +98,7 @@ if (GM_getValue('enable_settings')) {
   }
 
   let needReload = false
-  const knownPrefs = ['hlsPlayback', 'muteVideos', 'proxyVideos', 'replaceYoutube', 'theme']
+  const knownPrefs = ['hlsPlayback', 'muteVideos', 'proxyVideos', 'replaceYouTube', 'theme']
   for (const pref of knownPrefs) {
     GM_setValue(pref, GM_getValue(pref, null)) // Initialise Values page with well-known settings
   }
