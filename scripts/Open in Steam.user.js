@@ -19,3 +19,4 @@ button.style.marginRight = '9px'
 button.href = `steam://openurl/${location.href}`
 button.innerText = 'Open in Steam'
 original.parentNode.insertBefore(button, original)
+original.remove()
