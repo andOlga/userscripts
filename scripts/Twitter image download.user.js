@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Twitter image download
-// @namespace   https://github.com/ooa113y/userscripts
-// @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
+// @namespace   https://github.com/andOlga/userscripts
+// @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @description Download images from Twitter with sensible filenames
 // @icon        https://twitter.com/favicon.ico
 // @version     2

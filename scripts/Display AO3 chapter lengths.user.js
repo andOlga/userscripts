@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Display AO3 chapter lengths
-// @namespace    https://github.com/ooa113y/userscripts
+// @namespace    https://github.com/andOlga/userscripts
 // @description  Displays the word count of the current chapter on AO3 works alongside the total word count.
 // @icon         https://archiveofourown.org/favicon.ico
-// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @homepageURL  https://github.com/andOlga/userscripts/tree/master/scripts
 // @version      2
 // @match        https://archiveofourown.org/works/*/chapters/*
 // @grant        none

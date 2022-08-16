@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Force pixiv R18 mode
-// @namespace   https://github.com/ooa113y/userscripts
-// @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
+// @namespace   https://github.com/andOlga/userscripts
+// @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @description Forces pixiv to always show only R18 images (when possible)
 // @icon        https://www.pixiv.net/favicon.ico
 // @version     1

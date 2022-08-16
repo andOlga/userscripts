@@ -2,8 +2,8 @@
 // @name        GitHub editor button
 // @description Add a visual "Editor" button to GitHub repos to complement the "." shortcut
 // @icon        https://github.dev/favicon.ico
-// @namespace   https://github.com/ooa113y/userscripts
-// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @namespace   https://github.com/andOlga/userscripts
+// @homepageURL  https://github.com/andOlga/userscripts/tree/master/scripts
 // @version      3
 // @match       https://github.com/*
 // @grant       none

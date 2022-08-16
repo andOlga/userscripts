@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Custom Steam gift card amount
-// @namespace   https://github.com/ooa113y/userscripts
-// @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
+// @namespace   https://github.com/andOlga/userscripts
+// @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @description Adds a "Custom amount" field for Steam gift cards
 // @icon        https://store.steampowered.com/favicon.ico
 // @version     2

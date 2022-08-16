@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         KHInsider mass download
-// @namespace    https://github.com/ooa113y/userscripts
+// @namespace    https://github.com/andOlga/userscripts
 // @match        https://downloads.khinsider.com/*
 // @description  Allows mass downloads of soundtracks from downloads.khinsider.com.
 // @icon         https://downloads.khinsider.com/images/favicon.ico
-// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @homepageURL  https://github.com/andOlga/userscripts/tree/master/scripts
 // @version      13
 // @grant GM_xmlhttpRequest
 // @grant GM_download

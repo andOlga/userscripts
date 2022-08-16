@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Force GoToMeeting web
-// @namespace    https://github.com/ooa113y/userscripts
+// @namespace    https://github.com/andOlga/userscripts
 // @description  Forces GoToMeeting links to open in a web browser, so that it doesn't try to force the client download on you.
-// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @homepageURL  https://github.com/andOlga/userscripts/tree/master/scripts
 // @version      1
 // @match        https://global.gotomeeting.com/join/*
 // @grant        none

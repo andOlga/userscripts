@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        Open in Steam
-// @namespace   https://github.com/ooa113y/userscripts
+// @namespace   https://github.com/andOlga/userscripts
 // @description Open Steam links in the client
 // @icon        https://store.steampowered.com/favicon.ico
-// @homepageURL  https://github.com/ooa113y/userscripts/tree/master/scripts
+// @homepageURL  https://github.com/andOlga/userscripts/tree/master/scripts
 // @version      3
 // @match       https://store.steampowered.com/*
 // @match       https://steamcommunity.com/*

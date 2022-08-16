@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        v.gd URL shortener
-// @namespace   https://github.com/ooa113y/userscripts
-// @homepageURL https://github.com/ooa113y/userscripts/tree/master/scripts
+// @namespace   https://github.com/andOlga/userscripts
+// @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @icon        https://v.gd/favicon.ico
 // @description Shortens URLs with the v.gd service
 // @version     2
