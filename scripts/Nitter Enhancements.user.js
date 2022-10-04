@@ -3,7 +3,7 @@
 // @namespace   https://github.com/andOlga/userscripts
 // @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     4
+// @version     5
 // @noframes
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
@@ -121,7 +121,7 @@ if (GM_getValue('enable_videofix')) {
       const button = document.createElement('button')
       button.innerText = 'Copy TwitFix link'
       button.addEventListener('click', event => {
-        GM_setClipboard(location.href.replace(location.host, 'fxtwitter.com'))
+        GM_setClipboard(location.href.replace(location.host, 'twxtter.com'))
         button.innerText = 'Copied!'
         setTimeout(_ => { button.innerText = 'Copy TwitFix link'}, 1000)
       })
@@ -138,7 +138,7 @@ if (GM_getValue('enable_imagedownload')) {
     button.style.left = 0
     button.style.top = 0
     button.addEventListener('click', _ => {
-      GM_download(location.pathname, location.pathname.replace('/pic/media%2F', '').replace('%3Fname%3Dorig', ''))
+      GM_download(location.pathname, location.pathname.replace('/pic/orig/media%2F', ''))
     })
     document.body.appendChild(button)
   }
