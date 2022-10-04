@@ -3,7 +3,7 @@
 // @namespace   https://github.com/andOlga/userscripts
 // @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @icon        https://nitter.net/favicon.ico
-// @version     5
+// @version     6
 // @noframes
 // @match https://nitter.net/*
 // @match https://nitter.42l.fr/*
@@ -74,7 +74,6 @@
 
 // === Check whether individual parts of the script are enabled/disabled ===
 GM_setValue('enable_redirect', GM_getValue('enable_redirect', true))
-GM_setValue('enable_settings', GM_getValue('enable_settings', true))
 GM_setValue('enable_videofix', GM_getValue('enable_videofix', true))
 GM_setValue('enable_imagedownload', GM_getValue('enable_imagedownload', true))
 
@@ -84,34 +83,6 @@ if (GM_getValue('enable_redirect')) {
     GM_setValue('redirect_instance', GM_getValue('redirect_instance', 'nitter.net'))
     location.href = location.href.replace(location.hostname, GM_getValue('redirect_instance'))
   }
-}
-
-// === Set Default Settings ===
-if (GM_getValue('enable_settings')) {
-  function getCookie(cookie) { // Helper function to check existing settings
-    const found = document.cookie.split('; ').find(x => x.startsWith(`${cookie}=`))
-    if (found) {
-      return found.split('=')[1]
-    } else {
-      return null
-    }
-  }
-
-  let needReload = false
-  const knownPrefs = ['hlsPlayback', 'muteVideos', 'proxyVideos', 'replaceYouTube', 'theme']
-  for (const pref of knownPrefs) {
-    GM_setValue(pref, GM_getValue(pref, null)) // Initialise Values page with well-known settings
-  }
-
-  for (const val of knownPrefs) {
-    if (GM_getValue(val) === null) continue
-    if (getCookie(val) === null) {
-      document.cookie = `${val}=${GM_getValue(val)}`
-      needReload = true
-    }
-  }
-
-  if (needReload) location.reload()
 }
 
 // === Fix Video Links ===
