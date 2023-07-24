@@ -4,15 +4,16 @@
 // @homepageURL https://github.com/andOlga/userscripts/tree/master/scripts
 // @description Adjusts the download section of /idgames pages to be more user-friendly
 // @icon        https://www.idsoftware.com/favicon.ico
-// @version     1
+// @version     2
 // @match       https://www.doomworld.com/idgames/*
 // @grant       GM_download
+// @grant       GM_getValue
 // ==/UserScript==
 const downloadTable = document.querySelector('table.download')
 if (downloadTable) {
   const links = [...downloadTable.querySelectorAll('a')]
   for (const link of links) {
-    if (link.href.startsWith('ftp://')) {
+    if (link.href.startsWith('ftp://') && !GM_getValue('keep_ftp')) {
       // Get rid of FTP links altogether -- most browsers no longer support these...
       link.parentNode.remove()
     } else {
