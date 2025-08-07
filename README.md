@@ -1,3 +1,5 @@
+# This repository is unmaintained. Up-to-date version on [Codeberg](https://codeberg.org/andOlga/userscripts).
+
 This repository contains userscripts I wrote to simplify/bypass some annoying things I encounter on the web.
 
 The scripts are listed [here](./scripts). To install any of them, select one and click the "Raw" button. If no installer pop-up shows, you'll need to install [Tampermonkey](https://tampermonkey.net) first.
